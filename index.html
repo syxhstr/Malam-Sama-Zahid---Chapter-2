@@ -2724,6 +2724,16 @@
 
       requestAnimationFrame(animate);
     })();
+
+    // Tetapkan nama tepat repo pertama kau di GitHub (semak huruf besar/kecil di URL GitHub)
+      const REPO1_FALLBACK = 'https://syxhstr.github.io/Malam-Sama-MADANI/';
+
+      const cameFromRepo1 = document.referrer && document.referrer.startsWith(window.location.origin);
+      const backTarget = cameFromRepo1 ? document.referrer : REPO1_FALLBACK;
+
+      document.querySelectorAll('a[href="https://syxhstr.github.io/Malam-Sama-MADANI/"]').forEach((link) => {
+        link.href = backTarget;
+      });
   </script>
 </body>
 </html>
