@@ -20,7 +20,6 @@
       background: #030508;
       color: #f1f5f9;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      touch-action: none;
     }
 
     #game-canvas {
@@ -30,6 +29,7 @@
       height: 100%;
       display: block;
       z-index: 1;
+      touch-action: none;
     }
 
     #vignette-overlay {
@@ -65,13 +65,15 @@
       display: none !important;
     }
 
-    /* ================= SKRIN MASUK MINIMALIS (PLAY + SENSITIVITI SAHAJA) ================= */
+    /* ================= SKRIN MASUK MINIMALIS ================= */
     #lobby-screen {
       background: radial-gradient(circle at center, rgba(10, 15, 28, 0.72), rgba(2, 4, 9, 0.94));
       backdrop-filter: blur(5px);
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
+      touch-action: auto;
     }
 
     .entry-card {
@@ -82,6 +84,7 @@
       padding: 30px 24px;
       text-align: center;
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+      margin: auto;
     }
 
     .chapter-tag {
@@ -190,15 +193,21 @@
     .back-link {
       display: inline-block;
       margin-top: 16px;
-      font-size: 0.78rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: #93c5fd;
       text-decoration: none;
-      transition: color 0.15s ease;
+      background: rgba(30, 41, 59, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
 
     .back-link:hover {
-      color: #f8fafc;
+      color: #ffffff;
+      background: rgba(51, 65, 85, 0.8);
     }
 
     /* ================= CUTSCENE INTRO PANTAS (6 SAAT) ================= */
@@ -353,13 +362,8 @@
       transition: width 0.08s linear, background-color 0.2s ease;
     }
 
-    #stamina-bar {
-      background: #22c55e;
-    }
-
-    #battery-bar {
-      background: #facc15;
-    }
+    #stamina-bar { background: #22c55e; }
+    #battery-bar { background: #facc15; }
 
     .danger-banner {
       background: rgba(185, 28, 28, 0.92);
@@ -559,6 +563,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.55);
     }
 
@@ -597,18 +602,9 @@
         gap: 6px;
       }
 
-      .hud-card {
-        padding: 7px 9px;
-      }
-
-      .mission-text {
-        font-size: 0.78rem;
-      }
-
-      #minimap-canvas {
-        width: 102px;
-        height: 102px;
-      }
+      .hud-card { padding: 7px 9px; }
+      .mission-text { font-size: 0.78rem; }
+      #minimap-canvas { width: 102px; height: 102px; }
 
       .interact-prompt {
         top: 52%;
@@ -626,6 +622,8 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
+      touch-action: auto;
     }
 
     .modal-card {
@@ -635,12 +633,10 @@
       border-radius: 16px;
       padding: 24px;
       text-align: center;
+      margin: auto;
     }
 
-    .modal-card h2, .modal-card h1 {
-      margin-bottom: 10px;
-    }
-
+    .modal-card h2, .modal-card h1 { margin-bottom: 10px; }
     .death-card { border-color: rgba(239, 68, 68, 0.55); }
     .win-card { border-color: rgba(52, 211, 153, 0.55); }
 
@@ -813,9 +809,10 @@
         <strong>Telefon:</strong> Kayu ria kiri, leret kanan &amp; butang aksi di skrin.
       </div>
 
-    </<a href="https://syxhstr.github.io/Malam-Sama-MADANI/" class="back-link js-back-madani">&larr; Kembali ke Malam Sama MADANI</a>
+      <a href="https://syxhstr.github.io/Malam-Sama-MADANI/" class="back-link js-back-madani">&larr; Kembali ke Malam Sama MADANI</a>
     </div>
   </section>
+
   <!-- ================= 2. CUTSCENE INTRO PANTAS (6 SAAT) ================= -->
   <section id="intro-screen" class="screen">
     <div class="letterbox top"></div>
@@ -977,7 +974,7 @@
         </div>
       </div>
 
-    <div class="modal-actions">
+      <div class="modal-actions">
         <button type="button" id="btn-win-again" class="btn-primary">MAIN SEMULA</button>
         <a href="https://syxhstr.github.io/Malam-Sama-MADANI/" class="btn-secondary js-back-madani">&larr; Kembali ke Malam Sama MADANI</a>
       </div>
@@ -1173,9 +1170,7 @@
         }
       }
 
-      // === TAMAT BAHAGIAN 1 (SAMBUNG BAHAGIAN 2 DI BAWAH BARIS INI) ===
-
-     /* ================= 2. PETA 3D BAHARU: TEROWONG KARGO & STESEN B2 ================= */
+      /* ================= 2. PETA 3D BAHARU: TEROWONG KARGO & STESEN B2 ================= */
       function configureTex(tex, rx = 1, ry = 1, isColor = true) {
         tex.wrapS = THREE.RepeatWrapping;
         tex.wrapT = THREE.RepeatWrapping;
@@ -1202,7 +1197,6 @@
         }
 
         if (style === 'track') {
-          // Kayu pelapik landasan & rel keluli
           ctx.fillStyle = '#291d16';
           for (let y = 0; y < S; y += 64) {
             ctx.fillRect(90, y + 10, S - 180, 26);
@@ -1211,7 +1205,6 @@
           ctx.fillRect(145, 0, 16, S);
           ctx.fillRect(S - 161, 0, 16, S);
         } else if (style === 'turbine') {
-          // Kisi logam industri & garisan amaran kuning
           ctx.strokeStyle = '#0f172a';
           ctx.lineWidth = 4;
           ctx.strokeRect(4, 4, S - 8, S - 8);
@@ -1224,8 +1217,17 @@
           ctx.strokeRect(2, 2, S - 4, S - 4);
         }
 
-        const map = configureTex(new THREE.CanvasTexture(c), Math.max(2, Math.round(w / 3.5)), Math.max(2, Math.round(d / 3.5)), true);
-        return new THREE.MeshStandardMaterial({ map, roughness: 0.82, metalness: style === 'turbine' ? 0.35 : 0.1 });
+        const map = configureTex(
+          new THREE.CanvasTexture(c),
+          Math.max(2, Math.round(w / 3.5)),
+          Math.max(2, Math.round(d / 3.5)),
+          true
+        );
+        return new THREE.MeshStandardMaterial({
+          map,
+          roughness: 0.82,
+          metalness: style === 'turbine' ? 0.35 : 0.1
+        });
       }
 
       function createTunnelWallMat() {
@@ -1244,7 +1246,6 @@
           ctx.fillRect(px, py, 3, 3);
         }
 
-        // Rib konkrit terowong & jalur amaran bawah
         ctx.fillStyle = '#111827';
         for (let x = 0; x < S; x += 128) {
           ctx.fillRect(x, 0, 18, S);
@@ -1292,7 +1293,6 @@
           this.blastGateMesh = null;
           this.consoleLedMesh = null;
 
-          // Zon Terowong & Stesen Janakuasa B2 (Tiada pintu bilik berkunci!)
           this.zones = [
             { name: 'Runtuhan Lif Selatan', x: 0, z: 27, w: 14, d: 10, style: 'concrete' },
             { name: 'Dewan Turbin Utama', x: 0, z: 3, w: 16, d: 38, style: 'turbine' },
@@ -1301,7 +1301,6 @@
             { name: 'Dek Kawalan Utara', x: 0, z: -24, w: 44, d: 16, style: 'turbine' }
           ];
 
-          // Rangkaian nod laluan AI gelung penuh (supaya Zahid boleh kejar & pintas dari kiri/kanan)
           this.navNodes = [
             { id: 0, pos: new THREE.Vector3(0, 0, 27), links: [1] },
             { id: 1, pos: new THREE.Vector3(0, 0, 19), links: [0, 2, 3] },
@@ -1380,31 +1379,24 @@
             this.scene.add(ceil);
           }
 
-          // Dinding Runtuhan Lif Selatan (z = 22 hingga 32.3)
           this.addBox(0, H / 2, 32.3, 14.6, H, 0.6, this.wallMat);
           this.addBox(-7.3, H / 2, 27, 0.6, H, 10.6, this.wallMat);
           this.addBox(7.3, H / 2, 27, 0.6, H, 10.6, this.wallMat);
 
-          // Dinding Luar Kiri (-22.3) & Kanan (+22.3)
           this.addBox(-22.3, H / 2, -3, 0.6, H, 58.6, this.wallMat);
           this.addBox(22.3, H / 2, -3, 0.6, H, 58.6, this.wallMat);
 
-          // Dinding Selatan Terowong Barat & Timur (z = 26.3)
           this.addBox(-14.8, H / 2, 26.3, 15.6, H, 0.6, this.wallMat);
           this.addBox(14.8, H / 2, 26.3, 15.6, H, 0.6, this.wallMat);
 
-          // Dinding Utara Dek Kawalan (z = -32.3)
           this.addBox(0, H / 2, -32.3, 45.2, H, 0.6, this.wallMat);
 
-          // Pemisah konkrit tebal antara Terowong Barat (-10) & Dewan Turbin, dengan laluan terbuka di z=17, z=-12
           this.addBox(-10, H / 2, 22.8, 3.6, H, 7.2, this.wallMat);
           this.addBox(-10, H / 2, 2.5, 3.6, H, 22.0, this.wallMat);
 
-          // Pemisah konkrit tebal antara Dewan Turbin & Terowong Timur (+10), dengan laluan terbuka di z=17, z=-12
           this.addBox(10, H / 2, 22.8, 3.6, H, 7.2, this.wallMat);
           this.addBox(10, H / 2, 2.5, 3.6, H, 22.0, this.wallMat);
 
-          // Lampu kecemasan merah malap (atmosfera seram gelap)
           this.addEmergencyRedLight(0, 4.7, 29, true);
           this.addEmergencyRedLight(0, 4.7, 6, true);
           this.addEmergencyRedLight(-17, 4.7, 15, false);
@@ -1441,7 +1433,6 @@
         }
 
         addCargoTrainCar(x, z, bodyColor = 0x1e293b) {
-          // Gerabak tren kargo terbiar di atas landasan Barat
           this.colliders.push({ minX: x - 1.55, maxX: x + 1.55, minZ: z - 5.2, maxZ: z + 5.2 });
           const g = new THREE.Group();
           g.position.set(x, 0, z);
@@ -1457,7 +1448,6 @@
           body.position.y = 2.2;
           g.add(body);
 
-          // Rusuk kontena gerabak
           for (let rz = -4.2; rz <= 4.2; rz += 1.4) {
             const rib = new THREE.Mesh(new THREE.BoxGeometry(3.12, 2.75, 0.18), rustMat);
             rib.position.set(0, 2.2, rz);
@@ -1471,15 +1461,12 @@
           const crateMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.45, roughness: 0.55 });
           const pipeMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.75, roughness: 0.3 });
 
-          // 2 Turbin Gergasi di Dewan Turbin Utama (mencipta laluan kiri/tengah/kanan)
           this.addTurbineUnit(0, 7.5);
           this.addTurbineUnit(0, -3.5);
 
-          // 2 Gerabak Tren Kargo Terbiar di Terowong Barat (sempit & penuh bayang gelap)
           this.addCargoTrainCar(-19.2, 9.5, 0x1e3a8a);
           this.addCargoTrainCar(-19.2, -5.5, 0x334155);
 
-          // Tangki Bahan Api & Paip di Terowong Servis Timur
           [11, 2, -7].forEach((tz) => {
             this.colliders.push({ minX: 18.2, maxX: 21.4, minZ: tz - 1.6, maxZ: tz + 1.6 });
             const tank = new THREE.Mesh(new THREE.CylinderGeometry(1.45, 1.45, 4.2, 16), pipeMat);
@@ -1487,13 +1474,11 @@
             this.scene.add(tank);
           });
 
-          // Runtuhan pintu lif di selatan (tempat mula)
           const brokenDoor = new THREE.Mesh(new THREE.BoxGeometry(2.4, 2.8, 0.2), crateMat);
           brokenDoor.position.set(-1.8, 1.2, 31.6);
           brokenDoor.rotation.z = 0.24;
           this.scene.add(brokenDoor);
 
-          // Papan tanda zon
           const signNorth = new THREE.Mesh(
             new THREE.PlaneGeometry(3.8, 0.8),
             new THREE.MeshBasicMaterial({ map: createSignTexture('PINTU BLAST UTARA', '#38bdf8') })
@@ -1503,7 +1488,6 @@
         }
 
         spawnEnergyCellsAndConsole() {
-          // 1. Pintu Blast Utara & Konsol Kawalan (z = -31.6)
           const gateFrameMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.3 });
           const blastDoorMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.75, roughness: 0.32 });
 
@@ -1511,8 +1495,7 @@
           this.addBox(2.6, 2.0, -31.7, 0.5, 4.0, 0.5, gateFrameMat, false);
           this.blastGateMesh = this.addBox(0, 1.85, -31.7, 4.8, 3.7, 0.35, blastDoorMat, false);
 
-          // Konsol Pengaktif Pintu Blast
-          const consolePedestal = this.addBox(3.4, 0.65, -30.6, 0.9, 1.3, 0.8, gateFrameMat, true);
+          this.addBox(3.4, 0.65, -30.6, 0.9, 1.3, 0.8, gateFrameMat, true);
           const ledMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
           this.consoleLedMesh = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.32, 0.1), ledMat);
           this.consoleLedMesh.position.set(3.4, 1.35, -30.18);
@@ -1525,7 +1508,6 @@
             done: false
           });
 
-          // 2. 3 Sel Tenaga Bercahaya (lokasi rawak setiap pusingan)
           this.cellPresets = [
             [
               { x: -14.5, z: 10.5 },
@@ -1749,7 +1731,6 @@
         }
 
         setAggressionLevel(cellsCount) {
-          // Setiap Sel Tenaga yang diambil buat Zahid makin laju & agresif
           this.baseSpeed = 3.8 + cellsCount * 0.45;
           this.chaseSpeed = 5.6 + cellsCount * 0.42;
         }
@@ -1866,12 +1847,10 @@
         }
 
         canDetectPlayer(flatPlayer, dist, isLightOn, isSprinting) {
-          // Bunyi langkah pecut dekat mengesan pemain walaupun dalam gelap
           if (isSprinting && dist < 11.5 && this.hasLineOfSight(this.position, flatPlayer, 0.25)) {
             return true;
           }
 
-          // Jika lampu suluh menyala, jarak penglihatan Zahid jauh (22m); jika gelap, hanya 7.5m
           const maxSight = isLightOn ? 22.0 : 7.5;
           if (dist > maxSight) return false;
           if (!this.hasLineOfSight(this.position, flatPlayer, 0.25)) return false;
@@ -1990,11 +1969,9 @@
       camera.rotation.order = 'YXZ';
       scene.add(camera);
 
-      // Pencahayaan ambien sangat malap supaya lampu suluh betul-betul berguna
       const ambientLight = new THREE.AmbientLight(0x1e293b, 0.42);
       scene.add(ambientLight);
 
-      // Lampu Suluh Dinamo 3D di tangan pemain
       const flashlightGroup = new THREE.Group();
       const torchBody = new THREE.Mesh(
         new THREE.CylinderGeometry(0.035, 0.042, 0.24, 12),
@@ -2023,6 +2000,12 @@
       const audio = new HorrorAudio();
       const tunnelMap = new TunnelMap(scene);
       const zahid = new ZahidEntity(scene, tunnelMap);
+
+      const mobInteractBtn = document.getElementById('mob-interact');
+      const mobLightBtn = document.getElementById('mob-light');
+      const mobChargeBtn = document.getElementById('mob-charge');
+      const mobSprintBtn = document.getElementById('mob-sprint');
+      const mobTurnBtn = document.getElementById('mob-turn');
 
       const state = {
         mode: 'LOBBY',
@@ -2063,7 +2046,6 @@
         Object.entries(screens).forEach(([k, el]) => el.classList.toggle('active', k === name));
       }
 
-      // Slider sensitiviti tetikus/kamera
       const sensSlider = document.getElementById('sens-slider');
       const sensVal = document.getElementById('sens-val');
       sensSlider.addEventListener('input', () => {
@@ -2122,6 +2104,9 @@
         isHoldingAction = false;
         mobileSprintActive = false;
 
+        mobSprintBtn.classList.remove('sprint-active');
+        mobLightBtn.classList.add('active-state');
+
         tunnelMap.cellsList.forEach((c) => {
           c.done = false;
           c.mesh.visible = true;
@@ -2144,14 +2129,12 @@
         }
         state.flashlightOn = !state.flashlightOn;
         audio.playClick();
-        const mobLightBtn = document.getElementById('mob-light');
-        if (mobLightBtn) mobLightBtn.classList.toggle('active-state', state.flashlightOn);
+        mobLightBtn.classList.toggle('active-state', state.flashlightOn);
       }
 
       function crankDynamo() {
         state.battery = Math.min(100, state.battery + 18);
         audio.playCrank();
-        // Bunyi dinamo mengecas boleh didengari Zahid jika dia sangat hampir (< 9m)
         if (zahid.position.distanceTo(state.pos) < 9.5) {
           zahid.alertToLocation(state.pos);
         }
@@ -2217,7 +2200,7 @@
       });
       window.addEventListener('contextmenu', (e) => e.preventDefault());
 
-      // Kawalan Telefon (Floating Joystick + Look Zone + Butang Aksi)
+      // Kawalan Telefon
       const joyZone = document.getElementById('joystick-zone');
       const joyBase = document.getElementById('joystick-base');
       const joyStick = document.getElementById('joystick-stick');
@@ -2308,41 +2291,39 @@
       lookZone.addEventListener('touchend', resetLook);
       lookZone.addEventListener('touchcancel', resetLook);
 
-      // Butang Telefon
-      const mobInteractBtn = document.getElementById('mob-interact');
-      mobInteractBtn.addEventListener('touchstart', (e) => {
+      // Butang Telefon (sokong sentuhan & klik)
+      mobInteractBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         isHoldingAction = true;
         handleInstantPickup();
-      }, { passive: false });
-      mobInteractBtn.addEventListener('touchend', () => { isHoldingAction = false; });
-      mobInteractBtn.addEventListener('touchcancel', () => { isHoldingAction = false; });
+      });
+      mobInteractBtn.addEventListener('pointerup', () => { isHoldingAction = false; });
+      mobInteractBtn.addEventListener('pointercancel', () => { isHoldingAction = false; });
 
-      document.getElementById('mob-light').addEventListener('touchstart', (e) => {
+      mobLightBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         toggleFlashlight();
-      }, { passive: false });
+      });
 
-      document.getElementById('mob-charge').addEventListener('touchstart', (e) => {
+      mobChargeBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         crankDynamo();
-      }, { passive: false });
+      });
 
-      const mobSprintBtn = document.getElementById('mob-sprint');
-      mobSprintBtn.addEventListener('touchstart', (e) => {
+      mobSprintBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         mobileSprintActive = !mobileSprintActive;
         mobSprintBtn.classList.toggle('sprint-active', mobileSprintActive);
-      }, { passive: false });
+      });
 
       let targetTurnYaw = null;
-      document.getElementById('mob-turn').addEventListener('touchstart', (e) => {
+      mobTurnBtn.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         if (state.mode === 'PLAYING') {
           targetTurnYaw = state.yaw + Math.PI;
           audio.playClick();
         }
-      }, { passive: false });
+      });
 
       document.getElementById('btn-pause').addEventListener('click', pauseGame);
       document.getElementById('btn-resume').addEventListener('click', () => { audio.playClick(); beginGameplay(); });
@@ -2354,6 +2335,18 @@
       document.getElementById('btn-retry').addEventListener('click', () => { resetGame(); beginGameplay(); });
       document.getElementById('btn-death-lobby').addEventListener('click', returnToLobby);
       document.getElementById('btn-win-again').addEventListener('click', () => { resetGame(); beginGameplay(); });
+
+      // Pautan balik ke Malam Sama MADANI
+      document.querySelectorAll('.js-back-madani').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          audio.updateProximityAudio(999, 0, false);
+          if (document.pointerLockElement) {
+            try { document.exitPointerLock(); } catch (_) {}
+          }
+          window.location.href = 'https://syxhstr.github.io/Malam-Sama-MADANI/';
+        });
+      });
 
       function pauseGame() {
         if (state.mode !== 'PLAYING') return;
@@ -2497,7 +2490,7 @@
           if (state.stamina === 0) {
             state.exhausted = true;
             mobileSprintActive = false;
-            if (mobSprintBtn) mobSprintBtn.classList.remove('sprint-active');
+            mobSprintBtn.classList.remove('sprint-active');
           }
         } else {
           state.stamina = Math.min(100, state.stamina + 18 * dt);
@@ -2529,13 +2522,11 @@
           }
         }
 
-        // Update bateri & pancaran lampu suluh dinamo
         if (state.flashlightOn) {
           state.battery = Math.max(0, state.battery - 2.6 * dt);
           if (state.battery === 0) {
             state.flashlightOn = false;
-            const mobLightBtn = document.getElementById('mob-light');
-            if (mobLightBtn) mobLightBtn.classList.remove('active-state');
+            mobLightBtn.classList.remove('active-state');
           }
         }
 
@@ -2563,7 +2554,6 @@
           -0.45
         );
 
-        // Interaksi dengan Sel Tenaga atau Konsol Pintu Blast Utara
         nearestInteractable = null;
         let bestDist = 3.0;
         for (const item of tunnelMap.interactables) {
@@ -2587,7 +2577,7 @@
           } else if (nearestInteractable.type === 'console') {
             if (state.cellsCollected < 3) {
               holdWrap.classList.add('hidden');
-              promptTxt.innerHTML = `Konsol Pintu Blast (Perlukan 3 Sel Tenaga)`;
+              promptTxt.innerHTML = 'Konsol Pintu Blast (Perlukan 3 Sel Tenaga)';
             } else {
               holdWrap.classList.remove('hidden');
               promptTxt.innerHTML = `<strong>TAHAN [E] / AKSI</strong> untuk angkat Pintu Blast (${Math.round((state.gateHoldTime / 5) * 100)}%)`;
@@ -2595,7 +2585,6 @@
               if (isHoldingAction) {
                 state.gateHoldTime = Math.min(5.0, state.gateHoldTime + dt);
                 audio.playAlarmPulse();
-                // Bunyi siren & angkatan pintu menarik Zahid ke Dek Kawalan Utara!
                 zahid.alertToLocation(nearestInteractable.position);
                 if (state.gateHoldTime >= 5.0) {
                   triggerWin();
@@ -2631,13 +2620,11 @@
           mCtx.fillRect(cx + (z.x - z.w / 2) * scale, cy + (z.z - z.d / 2) * scale, z.w * scale, z.d * scale);
         }
 
-        // Halangan utama (Turbin & Tren Kargo)
         mCtx.fillStyle = '#070a12';
         for (const b of tunnelMap.colliders) {
           mCtx.fillRect(cx + b.minX * scale, cy + b.minZ * scale, (b.maxX - b.minX) * scale, (b.maxZ - b.minZ) * scale);
         }
 
-        // 3 Sel Tenaga & Konsol Pintu Blast
         for (const item of tunnelMap.interactables) {
           if (item.done) continue;
           mCtx.fillStyle = item.type === 'cell' ? '#38bdf8' : '#22c55e';
@@ -2678,7 +2665,6 @@
           camera.position.set(Math.sin(t) * 6.5, 2.2, 4 + Math.cos(t) * 14);
           camera.lookAt(0, 1.5, -6);
         } else if (state.mode === 'INTRO') {
-          // Cutscene POV pantas 6 saat: bangun dari lantai runtuhan & nampak kelibat Zahid di bawah lampu merah
           state.introTimer += dt;
           const captionEl = document.getElementById('intro-caption');
 
@@ -2702,7 +2688,15 @@
         } else if (state.mode === 'PLAYING') {
           state.elapsedTime += dt;
           const isSprinting = updatePlayerAndEquipment(dt, now);
-          const dist = zahid.update(dt, state.pos, state.yaw, state.flashlightOn && state.battery > 0, isSprinting, audio, triggerCatch);
+          const dist = zahid.update(
+            dt,
+            state.pos,
+            state.yaw,
+            state.flashlightOn && state.battery > 0,
+            isSprinting,
+            audio,
+            triggerCatch
+          );
 
           const dangerRatio = zahid.state === 'KEJAR'
             ? Math.max(0.3, Math.min(1, 1 - dist / 18))
@@ -2719,15 +2713,6 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      requestAnimationFrame(animate);
-
-      document.querySelectorAll('.js-back-madani').forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.location.href = 'https://syxhstr.github.io/Malam-Sama-MADANI/';
-        });
       });
 
       requestAnimationFrame(animate);
