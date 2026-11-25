@@ -813,10 +813,9 @@
         <strong>Telefon:</strong> Kayu ria kiri, leret kanan &amp; butang aksi di skrin.
       </div>
 
-      <a href="../Malam-Sama-Madani/" class="back-link">&larr; Kembali ke Malam Sama MADANI</a>
+    </<a href="https://syxhstr.github.io/Malam-Sama-MADANI/" class="back-link js-back-madani">&larr; Kembali ke Malam Sama MADANI</a>
     </div>
   </section>
-
   <!-- ================= 2. CUTSCENE INTRO PANTAS (6 SAAT) ================= -->
   <section id="intro-screen" class="screen">
     <div class="letterbox top"></div>
@@ -978,9 +977,9 @@
         </div>
       </div>
 
-      <div class="modal-actions">
+    <div class="modal-actions">
         <button type="button" id="btn-win-again" class="btn-primary">MAIN SEMULA</button>
-        <a href="../Malam-Sama-Madani/" class="btn-secondary">&larr; Kembali ke Malam Sama MADANI</a>
+        <a href="https://syxhstr.github.io/Malam-Sama-MADANI/" class="btn-secondary js-back-madani">&larr; Kembali ke Malam Sama MADANI</a>
       </div>
     </div>
   </section>
@@ -2723,17 +2722,16 @@
       });
 
       requestAnimationFrame(animate);
-    })();
 
-    // Tetapkan nama tepat repo pertama kau di GitHub (semak huruf besar/kecil di URL GitHub)
-      const REPO1_FALLBACK = 'https://syxhstr.github.io/Malam-Sama-MADANI/';
-
-      const cameFromRepo1 = document.referrer && document.referrer.startsWith(window.location.origin);
-      const backTarget = cameFromRepo1 ? document.referrer : REPO1_FALLBACK;
-
-      document.querySelectorAll('a[href="https://syxhstr.github.io/Malam-Sama-MADANI/"]').forEach((link) => {
-        link.href = backTarget;
+      document.querySelectorAll('.js-back-madani').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'https://syxhstr.github.io/Malam-Sama-MADANI/';
+        });
       });
+
+      requestAnimationFrame(animate);
+    })();
   </script>
 </body>
 </html>
